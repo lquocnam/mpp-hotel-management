@@ -1,4 +1,4 @@
-package edu.miu.cs401.mpp.hotelmanagement.data;
+package edu.miu.cs401.mpp.hotelmanagement.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

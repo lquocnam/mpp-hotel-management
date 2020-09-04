@@ -1,3 +1,10 @@
 spring:
   profiles:
-    active: hsql
+    active: mysql
+  security:
+    user:
+      name: nam
+      password: nam
+      roles: manager
+server:
+  port: 9999

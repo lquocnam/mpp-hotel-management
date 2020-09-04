@@ -1,7 +1,6 @@
 package edu.miu.cs401.mpp.hotelmanagement.service;
 
-import org.springframework.stereotype.Service;
+import edu.miu.cs401.mpp.hotelmanagement.dto.RoomDto;
 
-@Service
-public class RoomService {
+public interface RoomService extends Service<RoomDto, String> {
 }
