@@ -1,13 +1,12 @@
 package edu.miu.cs401.mpp.hotelmanagement.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 @Entity
-public class Room {
-
-    @Id
-    @GeneratedValue
-    private Long id;
+public class Room extends BaseEntity {
 
     private String roomNo;
 
@@ -18,10 +17,6 @@ public class Room {
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
     private RoomType roomType;
-
-    public Long getId() {
-        return id;
-    }
 
     public String getRoomNo() {
         return roomNo;
