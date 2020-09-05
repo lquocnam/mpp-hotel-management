@@ -1,9 +1,7 @@
 package edu.miu.cs401.mpp.hotelmanagement.config;
 
-import edu.miu.cs401.mpp.hotelmanagement.entity.Role;
-import edu.miu.cs401.mpp.hotelmanagement.entity.Room;
-import edu.miu.cs401.mpp.hotelmanagement.entity.RoomType;
-import edu.miu.cs401.mpp.hotelmanagement.entity.User;
+import edu.miu.cs401.mpp.hotelmanagement.entity.*;
+import edu.miu.cs401.mpp.hotelmanagement.repository.BookingEntryRepository;
 import edu.miu.cs401.mpp.hotelmanagement.repository.RoleRepository;
 import edu.miu.cs401.mpp.hotelmanagement.repository.RoomRepository;
 import edu.miu.cs401.mpp.hotelmanagement.service.UserService;
@@ -20,17 +18,20 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
     private final UserService userService;
     private final RoleRepository roleRepository;
     private final RoomRepository roomRepository;
+    private final BookingEntryRepository bookingEntryRepository;
 
-    public DataInitializer(UserService userService, RoleRepository roleRepository, RoomRepository roomRepository) {
+    public DataInitializer(UserService userService, RoleRepository roleRepository, RoomRepository roomRepository, BookingEntryRepository bookingEntryRepository) {
         this.userService = userService;
         this.roleRepository = roleRepository;
         this.roomRepository = roomRepository;
+        this.bookingEntryRepository = bookingEntryRepository;
     }
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         loadUsers();
         loadRooms();
+        loadBookingEntries();
     }
 
     private void loadUsers() {
@@ -46,5 +47,19 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
         Room room = new Room();
         room.setRoomNo("101").setCapacity(2).setRoomType(RoomType.Double).setPrice(100.0);
         roomRepository.save(room);
+    }
+
+    private void loadBookingEntries(){
+        BookingEntry bookingEntry1 = new BookingEntry();
+        bookingEntry1.setBookingNo("1111");
+        bookingEntryRepository.save(bookingEntry1);
+
+        BookingEntry bookingEntry2 = new BookingEntry();
+        bookingEntry2.setBookingNo("2222");
+        bookingEntryRepository.save(bookingEntry2);
+
+        BookingEntry bookingEntry3 = new BookingEntry();
+        bookingEntry3.setBookingNo("3333");
+        bookingEntryRepository.save(bookingEntry3);
     }
 }
