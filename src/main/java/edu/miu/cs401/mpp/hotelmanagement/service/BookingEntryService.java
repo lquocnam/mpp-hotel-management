@@ -8,5 +8,5 @@ import java.util.List;
 public interface BookingEntryService extends  Service<BookingEntryDTO, Long>{
     List<BookingEntryDTO> findByBookingNoAndStatus(String bookingNo, Status status);
     List<BookingEntryDTO> findByReferenceID(Integer id);
-//    List<BookingEntryDTO> findByByGuestName(String firstName, Status status);
+    List<BookingEntryDTO> findByGuestName(String firstName, Status status);
 }

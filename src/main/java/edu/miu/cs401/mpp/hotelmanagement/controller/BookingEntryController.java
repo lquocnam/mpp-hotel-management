@@ -2,6 +2,7 @@ package edu.miu.cs401.mpp.hotelmanagement.controller;
 
 import edu.miu.cs401.mpp.hotelmanagement.dto.BookingEntryDTO;
 import edu.miu.cs401.mpp.hotelmanagement.dto.RoomDto;
+import edu.miu.cs401.mpp.hotelmanagement.entity.Status;
 import edu.miu.cs401.mpp.hotelmanagement.service.BookingEntryService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +36,19 @@ public class BookingEntryController {
         model.addAttribute("bookingentries", bookingEntryService.getById(id));
         return "bookingentry/detail";
     }
+
+    @RequestMapping(value = "/bookingbyguest", method = RequestMethod.GET)
+//    @PreAuthorize("hasRole('SUPER')")
+    public String listByGuestName(@PathVariable String firstName, Status status, Model model) {
+        List<BookingEntryDTO> all = bookingEntryService.findByGuestName(firstName, status);
+        System.out.println("Test Data..........");
+        System.out.println(all);
+        model.addAttribute("bookingbyguest", all);
+        return "bookingentry/listByGuestName";
+    }
+
+
+
 
 
 

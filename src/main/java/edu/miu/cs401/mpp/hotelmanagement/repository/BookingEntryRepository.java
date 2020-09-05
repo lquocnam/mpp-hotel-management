@@ -14,7 +14,7 @@ public interface BookingEntryRepository extends JpaRepository<BookingEntry, Long
 
     Collection<BookingEntry> findByReferenceID(Integer id);
 
-//    @Query("select BookingEntry from BookingEntry, Guest where BookingEntry.guestID = Guest.id " +
-//            "and Guest.firstName like '%?%' and BookingEntry.status = '?'")
-//    Collection<BookingEntry> findByByGuestName(String firstName, Status status);
+    @Query(value = "select BookingEntry from BookingEntry, Guest where BookingEntry.guestID = Guest.id " +
+            "and Guest.firstName like '%?%' and BookingEntry.status = '?'", nativeQuery = true)
+    Collection<BookingEntry> findByGuestName(String firstName, Status status);
 }

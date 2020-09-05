@@ -29,10 +29,10 @@ public class BookingEntryServiceImpl extends BaseService<BookingEntry, BookingEn
         return list.stream().map(e -> converter.toDto(e)).collect(Collectors.toList());
     }
 
-//    @Override
-//    public List<BookingEntryDTO> findByByGuestName(String firstName, Status status) {
-//        BookingEntryRepository bookingEntryRepository = (BookingEntryRepository) repository;
-//        Collection<BookingEntry> list = bookingEntryRepository.findByByGuestName(firstName, status);
-//        return list.stream().map(e -> converter.toDto(e)).collect(Collectors.toList());
-//    }
+    @Override
+    public List<BookingEntryDTO> findByGuestName(String firstName, Status status) {
+        BookingEntryRepository bookingEntryRepository = (BookingEntryRepository) repository;
+        Collection<BookingEntry> list = bookingEntryRepository.findByGuestName(firstName, status);
+        return list.stream().map(e -> converter.toDto(e)).collect(Collectors.toList());
+    }
 }
