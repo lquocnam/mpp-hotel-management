@@ -35,7 +35,7 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
 
     private void loadUsers() {
         User user = new User();
-        user.setName("Administrator").setUsername("admin").setPassword("admin");
+        user.setFullname("Administrator").setUsername("admin").setPassword("admin");
         Role adminRole = new Role();
         adminRole.setCode("ADMIN").setName("Admin");
         user.setRoles(new HashSet(Collections.singletonList(roleRepository.save(adminRole))));

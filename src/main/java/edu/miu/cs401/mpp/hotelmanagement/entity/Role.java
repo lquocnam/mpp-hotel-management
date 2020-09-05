@@ -36,8 +36,8 @@ public class Role {
         return users;
     }
 
-    public Role setUsers(Set<User> users) {
-        this.users = users;
-        return this;
-    }
+//    public Role setUsers(Set<User> users) {
+//        this.users = users;
+//        return this;
+//    }
 }

@@ -1,6 +1,7 @@
 package edu.miu.cs401.mpp.hotelmanagement.entity;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
@@ -10,7 +11,11 @@ public class User {
     @Transient
     private String password;
     private String encryptedPassword;
-    private String name;
+    private String fullname;
+    private String gender;
+    private LocalDate DOB;
+    private LocalDate createdDate;
+    private Long phoneNumber;
 
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "username", referencedColumnName = "username"),
@@ -44,13 +49,29 @@ public class User {
         return this;
     }
 
-    public String getName() {
-        return name;
+    public LocalDate getCreatedDate() {
+        return createdDate;
     }
 
-    public User setName(String name) {
-        this.name = name;
+    public void setCreatedDate(LocalDate createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public User setFullname(String fullname) {
+        this.fullname = fullname;
         return this;
+    }
+
+    public Long getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(Long phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public Set<Role> getRoles() {
@@ -60,5 +81,21 @@ public class User {
     public User setRoles(Set<Role> roles) {
         this.roles = roles;
         return this;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public LocalDate getDOB() {
+        return DOB;
+    }
+
+    public void setDOB(LocalDate DOB) {
+        this.DOB = DOB;
     }
 }
