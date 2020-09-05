@@ -7,6 +7,7 @@ import java.util.Set;
 public class User {
     @Id
     private String username;
+    @Transient
     private String password;
     private String encryptedPassword;
     private String name;
