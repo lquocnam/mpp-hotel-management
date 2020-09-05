@@ -21,19 +21,19 @@ public class BookingEntryController {
         this.bookingEntryService = bookingEntryService;
     }
 
-    @RequestMapping(value = "/bookingentries", method = RequestMethod.GET)
+    @RequestMapping(value = "/bookingentry", method = RequestMethod.GET)
 //    @PreAuthorize("hasRole('SUPER')")
     public String list(Model model) {
         List<BookingEntryDTO> all = bookingEntryService.getAll();
         System.out.println("Test Data..........");
         System.out.println(all);
-        model.addAttribute("bookingentries", all);
+        model.addAttribute("bookingentry", all);
         return "bookingentry/list";
     }
 
-    @RequestMapping("bookingentries/{id}")
+    @RequestMapping("bookingentry/{id}")
     public String detail(@PathVariable Long id, Model model) {
-        model.addAttribute("bookingentries", bookingEntryService.getById(id));
+        model.addAttribute("bookingentry", bookingEntryService.getById(id));
         return "bookingentry/detail";
     }
 
@@ -45,6 +45,11 @@ public class BookingEntryController {
         System.out.println(all);
         model.addAttribute("bookingbyguest", all);
         return "bookingentry/listByGuestName";
+    }
+
+    @RequestMapping("bookingentry/create")
+    public String create(Model model) {
+        return "bookingentry/create";
     }
 
 
