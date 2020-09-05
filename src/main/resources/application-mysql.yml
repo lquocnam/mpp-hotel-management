@@ -6,3 +6,13 @@ spring:
     password: quocnamle
   jpa:
     generate-ddl: true
+
+  # Templates reloading during development
+  thymeleaf:
+    prefix: file:src/main/resources/templates/
+    cache: false
+
+  # Static resources reloading during development
+  resources:
+    static-locations: file:src/main/resources/static/
+#    cache-period: 0
