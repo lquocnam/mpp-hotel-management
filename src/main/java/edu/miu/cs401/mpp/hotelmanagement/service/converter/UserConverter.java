@@ -1,4 +1,4 @@
-package edu.miu.cs401.mpp.hotelmanagement.service.impl;
+package edu.miu.cs401.mpp.hotelmanagement.service.converter;
 
 import edu.miu.cs401.mpp.hotelmanagement.dto.UserDto;
 import edu.miu.cs401.mpp.hotelmanagement.entity.User;

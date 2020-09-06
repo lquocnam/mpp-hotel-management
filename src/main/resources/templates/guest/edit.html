@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:insert="fragments/head_crud"></th:block>
+<body class="sb-nav-fixed">
+<th:block th:insert="fragments/navbar :: navbar"></th:block>
+<div id="layoutSidenav">
+    <th:block th:insert="fragments/sidenav :: sidenav"></th:block>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <h1 class="mt-4">Rooms</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a th:href="${'/'}">Home</a></li>
+                    <li class="breadcrumb-item"><a th:href="${'/rooms'}">Rooms</a></li>
+                    <li class="breadcrumb-item active">Edit</li>
+                </ol>
+                <form method="post" th:action="@{/guests}">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add Guest</h4>
+                    </div>
+                    <div class="modal-body">
+                        <input name="id" th:value="${guest.id}" type="hidden">
+                        <div class="form-group">
+                            <label>First Name</label>
+                            <input class="form-control" name="firstName" th:value="${guest.firstName}" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name</label>
+                            <input class="form-control" name="lastName" th:value="${guest.lastName}" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label>Gender</label>
+                            <select class="form-control" id="gender" name="gender">
+                                <option th:each="gender : ${genders}"
+                                        th:text="${gender}" th:value="${gender}">
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input class="form-control" name="phoneNumber" th:value="${guest.phoneNumber}" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label>DOB</label>
+                            <input class="form-control" name="dob" th:value="${guest.dob}" type="date">
+                        </div>
+                        <div class="form-group">
+                            <label>Street</label>
+                            <input class="form-control" name="address.street" th:value="${guest.address.street}"
+                                   type="text">
+                        </div>
+                        <div class="form-group">
+                            <label>City</label>
+                            <input class="form-control" name="address.city" th:value="${guest.address.city}"
+                                   type="text">
+                        </div>
+                        <div class="form-group">
+                            <label>State</label>
+                            <input class="form-control" name="address.state" th:value="${guest.address.state}"
+                                   type="text">
+                        </div>
+                        <div class="form-group">
+                            <label>Zip Code</label>
+                            <input class="form-control" name="address.zip" th:value="${guest.address.zip}" type="text">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input class="btn btn-success" type="submit" value="Add">
+                    </div>
+                </form>
+            </div>
+        </main>
+        <th:block th:insert="fragments/footer :: footer"></th:block>
+    </div>
+</div>
+<th:block th:insert="fragments/scripts"></th:block>
+</body>
+</html>

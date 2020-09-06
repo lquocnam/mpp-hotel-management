@@ -8,6 +8,7 @@ import javax.persistence.Enumerated;
 @Entity
 public class Room extends BaseEntity {
 
+    @Column(unique = true)
     private String roomNo;
 
     private Integer capacity;
