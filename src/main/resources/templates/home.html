@@ -3,7 +3,6 @@
 <th:block th:insert="fragments/head :: head"></th:block>
 <body class="sb-nav-fixed">
 <th:block th:insert="fragments/navbar :: navbar"></th:block>
-
 <div id="layoutSidenav">
     <th:block th:insert="fragments/sidenav :: sidenav"></th:block>
     <div id="layoutSidenav_content">
@@ -567,20 +566,9 @@
                 </div>
             </div>
         </main>
-        <footer class="py-4 bg-light mt-auto">
-            <th:block th:insert="fragments/footer :: footer"></th:block>
-        </footer>
+        <th:block th:insert="fragments/footer :: footer"></th:block>
     </div>
 </div>
-<script crossorigin="anonymous" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script crossorigin="anonymous"
-        src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
-<script src="js/scripts.js" th:src="@{/js/scripts.js}"></script>
-<script crossorigin="anonymous" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
-<script src="assets/demo/chart-area-demo.js"></script>
-<script src="assets/demo/chart-bar-demo.js"></script>
-<script crossorigin="anonymous" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-<script crossorigin="anonymous" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-<script src="assets/demo/datatables-demo.js"></script>
+<th:block th:insert="fragments/scripts"></th:block>
 </body>
 </html>

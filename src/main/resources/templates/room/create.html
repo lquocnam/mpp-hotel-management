@@ -1,10 +1,57 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
->
-<head>
-    <title>Hello World!</title>
-</head>
-<body>
-<h1>Create Room</h1>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:insert="fragments/head_crud"></th:block>
+<body class="sb-nav-fixed">
+<th:block th:insert="fragments/navbar :: navbar"></th:block>
+<div id="layoutSidenav">
+    <th:block th:insert="fragments/sidenav :: sidenav"></th:block>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <h1 class="mt-4">Rooms</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a th:href="${'/'}">Home</a></li>
+                    <li class="breadcrumb-item"><a th:href="${'/rooms'}">Rooms</a></li>
+                    <li class="breadcrumb-item active">Add</li>
+                </ol>
+                <form method="post" th:action="@{/rooms}">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add Room</h4>
+                    </div>
+                    <div class="modal-body">
+                        <input name="id" type="hidden">
+                        <div class="form-group">
+                            <label>Room No.</label>
+                            <input class="form-control" name="roomNo" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label>Type</label>
+                            <select class="form-control" id="roomType" name="roomType">
+                                <option th:each="roomType : ${roomTypes}"
+                                        th:text="${roomType}" th:value="${roomType}">
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Capacity</label>
+                            <input class="form-control" name="capacity" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label>Price</label>
+                            <input class="form-control" name="price" type="text">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <!--                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">-->
+                        <input class="btn btn-success" type="submit" value="Add">
+                    </div>
+                </form>
+
+            </div>
+        </main>
+        <th:block th:insert="fragments/footer :: footer"></th:block>
+    </div>
+</div>
+<th:block th:insert="fragments/scripts"></th:block>
 </body>
 </html>

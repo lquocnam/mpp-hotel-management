@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface RoomService extends Service<RoomDto, Long> {
     List<RoomDto> searchBy(RoomType roomType, String roomNo);
+
+    List<RoomType> getRoomTypes();
 }

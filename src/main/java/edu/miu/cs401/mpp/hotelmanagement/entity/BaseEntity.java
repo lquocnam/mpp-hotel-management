@@ -17,6 +17,10 @@ public class BaseEntity {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @PrePersist
     public void prePersist() {
         audit.setCreatedOn(LocalDateTime.now());
