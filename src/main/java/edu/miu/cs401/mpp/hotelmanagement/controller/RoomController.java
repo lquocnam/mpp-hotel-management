@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
 
 @Controller
+@RequestMapping("/rooms")
 public class RoomController {
 
     private final RoomService roomService;
@@ -19,7 +20,7 @@ public class RoomController {
         this.roomService = roomService;
     }
 
-    @RequestMapping(value = "/rooms", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
 //    @PreAuthorize("hasRole('SUPER')")
     public String list(Model model) {
         List<RoomDto> all = roomService.getAll();
@@ -28,29 +29,35 @@ public class RoomController {
         return "room/list";
     }
 
-    @RequestMapping("rooms/{id}")
+    @RequestMapping("/{id}")
     public String detail(@PathVariable Long id, Model model) {
         model.addAttribute("room", roomService.getById(id));
         return "room/detail";
     }
 
-    @RequestMapping("rooms/edit/{id}")
-    public String edit(@PathVariable Integer id, Model model) {
-        return "room/edit";
-    }
-
-    @RequestMapping("rooms/create")
+    @RequestMapping("/create")
     public String create(Model model) {
+        model.addAttribute("roomTypes", roomService.getRoomTypes());
         return "room/create";
     }
 
-    @RequestMapping(value = "rooms", method = RequestMethod.POST)
-    public String save(RoomDto room) {
-        return "redirect:/rooms/" + room.getId();
+    @RequestMapping("/edit/{id}")
+    public String edit(@PathVariable Long id, Model model) {
+        RoomDto room = roomService.getById(id);
+        model.addAttribute("roomTypes", roomService.getRoomTypes());
+        model.addAttribute("room", room);
+        return "room/edit";
     }
 
-    @RequestMapping("rooms/delete/{id}")
-    public String delete(@PathVariable Integer id) {
-        return "redirect:/rooms/list";
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    public String save(RoomDto room) {
+        roomService.update(room);
+        return "redirect:/rooms";
+    }
+
+    @RequestMapping("/delete/{id}")
+    public String delete(@PathVariable Long id) {
+        roomService.delete(id);
+        return "redirect:/rooms";
     }
 }

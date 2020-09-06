@@ -1,10 +1,77 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
->
-<head>
-    <title>Hello World!</title>
-</head>
-<body>
-<h1>List Room</h1>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:insert="fragments/head_crud"></th:block>
+<body class="sb-nav-fixed">
+<th:block th:insert="fragments/navbar :: navbar"></th:block>
+<div id="layoutSidenav">
+    <th:block th:insert="fragments/sidenav :: sidenav"></th:block>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <h1 class="mt-4">Rooms</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a th:href="${'/'}">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Rooms</li>
+                </ol>
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <div class="table-title">
+                                <div class="row">
+                                    <div class="col-sm-9">
+                                        <h2>Manage Rooms</h2>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <a class="btn btn-success" th:href="@{/rooms/create}"><i class="material-icons">&#xE147;</i>
+                                            <span>Add Room</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <table cellspacing="0" class="table table-bordered" id="dataTable"
+                                   th:if="${not #lists.isEmpty(rooms)}" width="100%">
+                                <thead>
+                                <tr>
+                                    <th>Room No.</th>
+                                    <th>Capacity</th>
+                                    <th>Type</th>
+                                    <th>Price</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tfoot>
+                                <tr>
+                                    <th>Room No.</th>
+                                    <th>Capacity</th>
+                                    <th>Type</th>
+                                    <th>Price</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </tfoot>
+                                <tbody>
+                                <tr th:each="room : ${rooms}">
+                                    <td th:text="${room.roomNo}">Tiger Nixon</td>
+                                    <td th:text="${room.capacity}">System Architect</td>
+                                    <td th:text="${room.roomType}">Edinburgh</td>
+                                    <td th:text="${room.price}">61</td>
+                                    <td>
+                                        <a class="edit" th:href="@{/rooms/edit/{id}(id=${room.id})}">
+                                            <i class="material-icons" data-toggle="tooltip"
+                                               title="Edit">&#xE254;</i></a>
+                                        <a class="delete" th:href="@{/rooms/delete/{id}(id=${room.id})}">
+                                            <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <th:block th:insert="fragments/footer :: footer"></th:block>
+    </div>
+</div>
+<th:block th:insert="fragments/scripts"></th:block>
 </body>
 </html>

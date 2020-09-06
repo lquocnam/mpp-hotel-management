@@ -31,4 +31,15 @@ public class BaseService<E, D, ID> implements Service<D, ID> {
     public D add(D dto) {
         return converter.toDto(repository.save(converter.fromDto(dto)));
     }
+
+    @Override
+    public D update(D dto) {
+        E savedEntity = repository.save(converter.fromDto(dto));
+        return converter.toDto(savedEntity);
+    }
+
+    @Override
+    public void delete(ID id) {
+        repository.deleteById(id);
+    }
 }

@@ -8,4 +8,8 @@ public interface Service<D, ID> {
     D getById(ID id);
 
     D add(D dto);
+
+    D update(D dto);
+
+    void delete(ID id);
 }
