@@ -1,4 +1,4 @@
-package edu.miu.cs401.mpp.hotelmanagement.service.impl;
+package edu.miu.cs401.mpp.hotelmanagement.service.converter;
 
 import edu.miu.cs401.mpp.hotelmanagement.dto.RoomDto;
 import edu.miu.cs401.mpp.hotelmanagement.entity.Room;
@@ -10,4 +10,3 @@ import org.springframework.stereotype.Component;
 @Component
 public interface RoomConverter extends Converter<Room, RoomDto> {
 }
-//add comment.....

@@ -1,7 +1,8 @@
 package edu.miu.cs401.mpp.hotelmanagement.controller;
 
-import edu.miu.cs401.mpp.hotelmanagement.dto.RoomDto;
-import edu.miu.cs401.mpp.hotelmanagement.service.RoomService;
+
+import edu.miu.cs401.mpp.hotelmanagement.dto.GuestDto;
+import edu.miu.cs401.mpp.hotelmanagement.service.GuestService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,22 +12,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
 
 @Controller
-@RequestMapping("/rooms")
-public class RoomController {
+@RequestMapping("/guests")
+public class GuestController {
 
-    private final RoomService roomService;
+    private final GuestService guestService;
 
-    public RoomController(RoomService roomService) {
-        this.roomService = roomService;
+    public GuestController(GuestService guestService) {
+        this.guestService = guestService;
     }
+
 
     @RequestMapping(value = "", method = RequestMethod.GET)
 //    @PreAuthorize("hasRole('SUPER')")
     public String list(Model model) {
-        List<RoomDto> all = roomService.getAll();
+        List<GuestDto> all = guestService.getAll();
         System.out.println(all);
-        model.addAttribute("rooms", all);
-        return "room/list";
+        model.addAttribute("guests", all);
+        return "guest/list";
     }
 
 //    @RequestMapping("/{id}")
@@ -37,27 +39,27 @@ public class RoomController {
 
     @RequestMapping("/create")
     public String create(Model model) {
-        model.addAttribute("roomTypes", roomService.getRoomTypes());
-        return "room/create";
+        model.addAttribute("genders", guestService.getGenders());
+        return "guest/create";
     }
 
     @RequestMapping("/edit/{id}")
     public String edit(@PathVariable Long id, Model model) {
-        RoomDto room = roomService.getById(id);
-        model.addAttribute("roomTypes", roomService.getRoomTypes());
-        model.addAttribute("room", room);
-        return "room/edit";
+        GuestDto guest = guestService.getById(id);
+        model.addAttribute("genders", guestService.getGenders());
+        model.addAttribute("guest", guest);
+        return "guest/edit";
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public String save(RoomDto room) {
-        roomService.update(room);
-        return "redirect:/rooms";
+    public String save(GuestDto guest) {
+        guestService.update(guest);
+        return "redirect:/guests";
     }
 
     @RequestMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
-        roomService.delete(id);
-        return "redirect:/rooms";
+        guestService.delete(id);
+        return "redirect:/guests";
     }
 }

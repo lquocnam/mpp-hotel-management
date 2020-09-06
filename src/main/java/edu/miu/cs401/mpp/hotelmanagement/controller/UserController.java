@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
 
 @Controller
-@RequestMapping("/rooms")
-public class RoomController {
+@RequestMapping("/users")
+public class UserController {
 
     private final RoomService roomService;
 
-    public RoomController(RoomService roomService) {
+    public UserController(RoomService roomService) {
         this.roomService = roomService;
     }
 
@@ -25,8 +25,8 @@ public class RoomController {
     public String list(Model model) {
         List<RoomDto> all = roomService.getAll();
         System.out.println(all);
-        model.addAttribute("rooms", all);
-        return "room/list";
+        model.addAttribute("users", all);
+        return "user/list";
     }
 
 //    @RequestMapping("/{id}")
@@ -58,6 +58,6 @@ public class RoomController {
     @RequestMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
         roomService.delete(id);
-        return "redirect:/rooms";
+        return "redirect:/users";
     }
 }

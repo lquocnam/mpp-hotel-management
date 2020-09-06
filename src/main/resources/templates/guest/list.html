@@ -8,10 +8,10 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid">
-                <h1 class="mt-4">Rooms</h1>
+                <h1 class="mt-4">Guest</h1>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item"><a th:href="${'/'}">Home</a></li>
-                    <li class="breadcrumb-item active">Rooms</li>
+                    <li class="breadcrumb-item active">Guests</li>
                 </ol>
 
                 <div class="card mb-4">
@@ -23,42 +23,46 @@
                                         <h2></h2>
                                     </div>
                                     <div class="col-sm-3">
-                                        <a class="btn btn-success" th:href="@{/rooms/create}"><i class="material-icons">&#xE147;</i>
-                                            <span>Add Room</span></a>
+                                        <a class="btn btn-success" th:href="@{/guests/create}"><i
+                                                class="material-icons">&#xE147;</i>
+                                            <span>Add Guest</span></a>
                                     </div>
                                 </div>
                             </div>
                             <table cellspacing="0" class="table table-bordered" id="dataTable"
-                                   th:if="${not #lists.isEmpty(rooms)}" width="100%">
+                                   th:if="${not #lists.isEmpty(guests)}" width="100%">
                                 <thead>
                                 <tr>
-                                    <th>Room No.</th>
-                                    <th>Capacity</th>
-                                    <th>Type</th>
-                                    <th>Price</th>
+                                    <th>Full Name</th>
+                                    <th>Gender</th>
+                                    <th>Phone Number</th>
+                                    <th>DOB</th>
+                                    <th>Address</th>
                                     <th>Actions</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
                                 <tr>
-                                    <th>Room No.</th>
-                                    <th>Capacity</th>
-                                    <th>Type</th>
-                                    <th>Price</th>
+                                    <th>Full Name</th>
+                                    <th>Gender</th>
+                                    <th>Phone Number</th>
+                                    <th>DOB</th>
+                                    <th>Address</th>
                                     <th>Actions</th>
                                 </tr>
                                 </tfoot>
                                 <tbody>
-                                <tr th:each="room : ${rooms}">
-                                    <td th:text="${room.roomNo}">Tiger Nixon</td>
-                                    <td th:text="${room.capacity}">System Architect</td>
-                                    <td th:text="${room.roomType}">Edinburgh</td>
-                                    <td th:text="${room.price}">61</td>
+                                <tr th:each="guest : ${guests}">
+                                    <td th:text="${guest.fullName}">Tiger Nixon</td>
+                                    <td th:text="${guest.gender}">System Architect</td>
+                                    <td th:text="${guest.phoneNumber}">Edinburgh</td>
+                                    <td th:text="${guest.dob}">61</td>
+                                    <td th:text="${guest.address.address}">61</td>
                                     <td>
-                                        <a class="edit" th:href="@{/rooms/edit/{id}(id=${room.id})}">
+                                        <a class="edit" th:href="@{/guests/edit/{id}(id=${guest.id})}">
                                             <i class="material-icons" data-toggle="tooltip"
                                                title="Edit">&#xE254;</i></a>
-                                        <a class="delete" th:href="@{/rooms/delete/{id}(id=${room.id})}">
+                                        <a class="delete" th:href="@{/guests/delete/{id}(id=${guest.id})}">
                                             <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                                     </td>
                                 </tr>
