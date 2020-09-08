@@ -14,92 +14,104 @@
                     <li class="breadcrumb-item"><a th:href="${'/bookings'}">Bookings</a></li>
                     <li class="breadcrumb-item active">Edit</li>
                 </ol>
+                <!--                <div class="table-title">-->
+                <!--                    <div class="row">-->
+                <!--                        <div class="col-sm-9">-->
+                <!--                            <h2></h2>-->
+                <!--                        </div>-->
+                <!--                        <div class="col-sm-3">-->
+                <!--                            <a class="btn btn-success" th:href="@{/bookings/detail/create?bookingId={id}(id=${booking.id})}"><i class="material-icons">&#xE147;</i>-->
+                <!--                                <span>Add Detail</span></a>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
                 <form method="post" th:action="@{/bookings}">
                     <div class="modal-header">
-                        <h4 class="modal-title">Edit Booking</h4>
+                        <h4 class="modal-title">Edit Booking Information</h4>
                     </div>
                     <div class="modal-body">
-                        <input name="guest.id" th:value="${guest.id}" type="hidden">
+                        <!--                        <input name="guest.id" th:value="${guest.id}" type="hidden">-->
+                        <input name="id" th:value="${booking.id}" type="hidden">
                         <div class="form-group">
                             <label>Booking No.</label>
-                            <input class="form-control" disabled name="bookingNo" th:value="${booking.bookingNo}"
+                            <input class="form-control" name="bookingNo" th:value="${booking.bookingNo}"
                                    type="text">
                         </div>
                         <div class="form-group">
                             <label>From Date</label>
-                            <input class="form-control" disabled name="fromDate" th:value="${booking.fromDate}"
+                            <input class="form-control" name="fromDate" th:value="${booking.fromDate}"
                                    type="date">
                         </div>
                         <div class="form-group">
                             <label>To Date</label>
-                            <input class="form-control" disabled name="toDate" th:value="${booking.toDate}" type="date">
+                            <input class="form-control" name="toDate" th:value="${booking.toDate}" type="date">
                         </div>
                         <div class="form-group">
                             <label>Notes</label>
-                            <textarea class="form-control" disabled name="notes" th:value="${booking.notes}"></textarea>
+                            <textarea class="form-control" name="notes" th:text="${booking.notes}"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <!--                        <input class="btn btn-success" type="submit" value="Save">-->
+                        <input class="btn btn-success" type="submit" value="Save">
                     </div>
                 </form>
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <div class="table-responsive">
+                <!--                <div class="card mb-4">-->
+                <!--                    <div class="card-body">-->
+                <!--                        <div class="table-responsive">-->
 
-                            <table cellspacing="0" class="table table-bordered" id="dataTable"
-                                   th:if="${not #lists.isEmpty(details)}" width="100%">
-                                <thead>
-                                <tr>
-                                    <th>Room No.</th>
-                                    <th>Type</th>
-                                    <th>Status</th>
-                                    <th>Checkin Date</th>
-                                    <th>Checkout Date</th>
-                                    <th>Amount</th>
-                                    <th>Notes</th>
-                                    <th>Actions</th>
-                                </tr>
-                                </thead>
-                                <tfoot>
-                                <tr>
-                                    <th>Room No.</th>
-                                    <th>Type</th>
-                                    <th>Status</th>
-                                    <th>Checkin Date</th>
-                                    <th>Checkout Date</th>
-                                    <th>Amount</th>
-                                    <th>Notes</th>
-                                    <th>Actions</th>
-                                </tr>
-                                </tfoot>
-                                <tbody>
-                                <tr th:each="detail : ${details}">
-                                    <td th:text="${detail.room.roomNo}">Tiger Nixon</td>
-                                    <td th:text="${detail.type}">System Architect</td>
-                                    <td th:text="${detail.status}">System Architect</td>
-                                    <td th:text="${detail.checkinDate}">Edinburgh</td>
-                                    <td th:text="${detail.checkoutDate}">61</td>
-                                    <td th:text="${detail.amount}">61</td>
-                                    <td th:text="${detail.description}">61</td>
-                                    <td>
-                                        <a class="edit" th:href="@{/bookings/checkin?guestId={id}(id=${guest.id})}">
-                                            <i class="material-icons" data-toggle="tooltip"
-                                               title="Edit">&#xE254;</i></a>
-                                        <a class="edit"
-                                           th:href="@{/bookings/edit/{id}?guestId={guestId}(id=${booking.id}, guestId=${guest.id})}">
-                                            <i class="material-icons" data-toggle="tooltip"
-                                               title="Edit">&#xE254;</i></a>
-                                        <a class="delete"
-                                           th:href="@{/bookings/delete/{id}?guestId={guestId}(id=${booking.id}, guestId=${guest.id})}">
-                                            <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                <!--                            <table cellspacing="0" class="table table-bordered" id="dataTable"-->
+                <!--                                   th:if="${not #lists.isEmpty(details)}" width="100%">-->
+                <!--                                <thead>-->
+                <!--                                <tr>-->
+                <!--                                    <th>Room No.</th>-->
+                <!--                                    <th>Type</th>-->
+                <!--                                    <th>Status</th>-->
+                <!--                                    <th>Checkin Date</th>-->
+                <!--                                    <th>Checkout Date</th>-->
+                <!--                                    <th>Amount</th>-->
+                <!--                                    <th>Notes</th>-->
+                <!--                                    <th>Actions</th>-->
+                <!--                                </tr>-->
+                <!--                                </thead>-->
+                <!--                                <tfoot>-->
+                <!--                                <tr>-->
+                <!--                                    <th>Room No.</th>-->
+                <!--                                    <th>Type</th>-->
+                <!--                                    <th>Status</th>-->
+                <!--                                    <th>Checkin Date</th>-->
+                <!--                                    <th>Checkout Date</th>-->
+                <!--                                    <th>Amount</th>-->
+                <!--                                    <th>Notes</th>-->
+                <!--                                    <th>Actions</th>-->
+                <!--                                </tr>-->
+                <!--                                </tfoot>-->
+                <!--                                <tbody>-->
+                <!--                                <tr th:each="detail : ${details}">-->
+                <!--                                    <td th:text="${detail.room.roomNo}">Tiger Nixon</td>-->
+                <!--                                    <td th:text="${detail.type}">System Architect</td>-->
+                <!--                                    <td th:text="${detail.status}">System Architect</td>-->
+                <!--                                    <td th:text="${detail.checkinDate}">Edinburgh</td>-->
+                <!--                                    <td th:text="${detail.checkoutDate}">61</td>-->
+                <!--                                    <td th:text="${detail.amount}">61</td>-->
+                <!--                                    <td th:text="${detail.description}">61</td>-->
+                <!--                                    <td>-->
+                <!--                                        <a class="edit" th:href="@{/bookings/checkin?guestId={id}(id=${guest.id})}">-->
+                <!--                                            <i class="material-icons" data-toggle="tooltip"-->
+                <!--                                               title="Edit">&#xE254;</i></a>-->
+                <!--                                        <a class="edit"-->
+                <!--                                           th:href="@{/bookings/edit/{id}?guestId={guestId}(id=${booking.id}, guestId=${guest.id})}">-->
+                <!--                                            <i class="material-icons" data-toggle="tooltip"-->
+                <!--                                               title="Edit">&#xE254;</i></a>-->
+                <!--                                        <a class="delete"-->
+                <!--                                           th:href="@{/bookings/delete/{id}?guestId={guestId}(id=${booking.id}, guestId=${guest.id})}">-->
+                <!--                                            <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>-->
+                <!--                                    </td>-->
+                <!--                                </tr>-->
+                <!--                                </tbody>-->
+                <!--                            </table>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
             </div>
         </main>
         <th:block th:insert="fragments/footer :: footer"></th:block>

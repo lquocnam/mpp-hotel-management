@@ -31,10 +31,4 @@ public class BookingServiceImpl extends BaseService<Booking, BookingDto, Long> i
                         .filter(b -> BookingStatus.Open.equals(b.getStatus()))
                         .map(b -> converter.toDto(b)).collect(Collectors.toList())).orElse(Collections.emptyList());
     }
-
-    @Override
-    public BookingDto update(BookingDto dto) {
-        dto.setStatus(BookingStatus.Open);
-        return super.update(dto);
-    }
 }

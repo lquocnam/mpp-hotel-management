@@ -1,6 +1,7 @@
 package edu.miu.cs401.mpp.hotelmanagement.dto;
 
 import edu.miu.cs401.mpp.hotelmanagement.entity.BookingStatus;
+import edu.miu.cs401.mpp.hotelmanagement.entity.BookingType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -15,6 +16,7 @@ public class BookingDto {
     private Date toDate;
     private Double amount;
     private Long roomId;
+    private BookingType type;
     private BookingStatus status;
     private GuestDto guest;
 
@@ -78,6 +80,15 @@ public class BookingDto {
 
     public BookingDto setRoomId(Long roomId) {
         this.roomId = roomId;
+        return this;
+    }
+
+    public BookingType getType() {
+        return type;
+    }
+
+    public BookingDto setType(BookingType type) {
+        this.type = type;
         return this;
     }
 

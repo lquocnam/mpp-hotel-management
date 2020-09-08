@@ -14,17 +14,14 @@
                     <li class="breadcrumb-item"><a th:href="${'/bookings'}">Bookings</a></li>
                     <li class="breadcrumb-item active">Add Detail</li>
                 </ol>
-                <form method="post" th:action="@{/bookings/detail}">
+                <form method="post" th:action="@{/bookings}">
                     <div class="modal-header">
                         <h4 class="modal-title">Create Booking Detail</h4>
                     </div>
                     <div class="modal-body">
-                        <input name="id" th:value="${detail.id}" type="hidden">
-                        <input name="booking.id" th:value="${booking.id}" type="hidden">
                         <div class="form-group">
                             <label>Booking No.</label>
-                            <input class="form-control" disabled name="bookingNo"
-                                   th:value="${booking.bookingNo}" type="text">
+                            <input class="form-control" disabled name="bookingNo" type="text">
                         </div>
                         <div class="form-group">
                             <label>Choose Type</label>
@@ -36,7 +33,7 @@
                         </div>
                         <div class="form-group">
                             <label>Choose Room</label>
-                            <select class="form-control" id="room.id" name="room.id">
+                            <select class="form-control" id="roomId" name="roomId">
                                 <option th:each="room : ${availableRooms}"
                                         th:text="${room.roomNo}" th:value="${room.id}">
                                 </option>
@@ -44,8 +41,7 @@
                         </div>
                         <div class="form-group">
                             <label>Notes</label>
-                            <textarea class="form-control" name="description"
-                                      th:text="${detail.description}"></textarea>
+                            <textarea class="form-control" name="notes"></textarea>
                         </div>
 
                     </div>

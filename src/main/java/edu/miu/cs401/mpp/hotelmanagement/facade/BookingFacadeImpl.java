@@ -26,46 +26,81 @@ public class BookingFacadeImpl implements BookingFacade {
 
 
     @Override
-    public BookingDetailDto createOrUpdate(BookingDetailDto dto) {
-        if (dto.getBooking().getId() != null) {
-            return bookingService.getById(dto.getBooking().getId()).map(b -> {
-                dto.setBooking(b).setStatus(BookingStatus.Open);
-                switch (dto.getType()) {
-                    case Reservation:
-                        dto.setReservedDate(new Date());
-                        break;
-                    case Checkin:
-                        dto.setCheckinDate(new Date());
-                        break;
-                    case Checkout:
-                        dto.setCheckoutDate(new Date());
-                        break;
+    public BookingDetailDto createOrUpdate(BookingDetailDto detail) {
+        if (detail.getBooking() != null && detail.getBooking().getId() != null) {
+            return bookingService.getById(detail.getBooking().getId()).map(b -> {
+                detail.setBooking(b).setStatus(BookingStatus.Open);
+                setDate(detail);
+                if (detail.getRoom() != null && detail.getRoom().getId() != null) {
+                    roomService.getById(detail.getRoom().getId()).ifPresent(r -> detail.setAmount(r.getPrice()));
                 }
-                return bookingDetailService.update(dto);
-            }).orElse(dto);
+                BookingDetailDto updatedDetail = bookingDetailService.update(detail);
+                updateBookingAmount(b);
+                return updatedDetail;
+            }).orElse(detail);
         }
-        return dto;
+        return detail;
     }
 
     /**
-     * Create a new booking with one details
+     * Create a new or update an existing booking with one details
      *
-     * @param dto contains info of a booking
+     * @param booking contains info of a booking
      * @return
      */
     @Override
-    public BookingDto createNew(BookingDto dto) {
-        return roomService.getById(dto.getRoomId()).map(r -> {
-            dto.setStatus(BookingStatus.Open);
-            BookingDto created = bookingService.update(dto);
-            BookingDetailDto detailDto = new BookingDetailDto();
-            detailDto.setRoom(r)
-                    .setType(BookingType.Reservation)
-                    .setStatus(BookingStatus.Open)
-                    .setReservedDate(new Date())
-                    .setBooking(created);
-            bookingDetailService.update(detailDto);
-            return created;
-        }).orElseThrow(() -> new IllegalArgumentException("The room does not exist"));
+    public BookingDto createOrUpdate(BookingDto booking) {
+        if (booking.getId() != null && bookingService.getById(booking.getId()).isPresent()) {
+            booking.setStatus(BookingStatus.Open);
+            return bookingService.update(booking);
+        } else {
+            return roomService.getById(booking.getRoomId()).map(r -> {
+                booking.setStatus(BookingStatus.Open);
+                BookingDto created = bookingService.update(booking);
+                BookingDetailDto detailDto = new BookingDetailDto();
+                detailDto.setRoom(r)
+                        .setType(booking.getType())
+                        .setStatus(BookingStatus.Open)
+                        .setBooking(created)
+                        .setAmount(r.getPrice());
+                setDate(detailDto);
+                bookingDetailService.update(detailDto);
+                updateBookingAmount(created);
+                return created;
+            }).orElseThrow(() -> new IllegalArgumentException("The room does not exist"));
+        }
+    }
+
+    @Override
+    public void updateBookingAmount(BookingDto booking) {
+        double amount = bookingDetailService.getByBooking(booking).stream().mapToDouble(BookingDetailDto::getAmount).sum();
+        booking.setAmount(amount);
+        bookingService.update(booking);
+    }
+
+    @Override
+    public void checkout(BookingDto dto) {
+        dto.setStatus(BookingStatus.Completed);
+        bookingService.update(dto);
+        bookingDetailService.getByBooking(dto).forEach(detail -> {
+            detail.setType(BookingType.Checkout);
+            detail.setStatus(BookingStatus.Completed);
+            detail.setCheckoutDate(new Date());
+            bookingDetailService.update(detail);
+        });
+    }
+
+    private void setDate(BookingDetailDto detail) {
+        switch (detail.getType()) {
+            case Reservation:
+                detail.setReservedDate(new Date());
+                break;
+            case Checkin:
+                detail.setCheckinDate(new Date());
+                break;
+            case Checkout:
+                detail.setCheckoutDate(new Date());
+                break;
+        }
     }
 }

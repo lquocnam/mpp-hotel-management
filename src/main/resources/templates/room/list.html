@@ -32,6 +32,7 @@
                                 <thead>
                                 <tr>
                                     <th>Room No.</th>
+                                    <th th:if="${showGuestName}">Occupied By</th>
                                     <th>Capacity</th>
                                     <th>Type</th>
                                     <th>Price</th>
@@ -42,6 +43,7 @@
                                 <tfoot>
                                 <tr>
                                     <th>Room No.</th>
+                                    <th th:if="${showGuestName}">Occupied By</th>
                                     <th>Capacity</th>
                                     <th>Type</th>
                                     <th>Price</th>
@@ -52,6 +54,7 @@
                                 <tbody>
                                 <tr th:each="room : ${rooms}">
                                     <td th:text="${room.roomNo}">Tiger Nixon</td>
+                                    <th th:if="${showGuestName}" th:text="${room.guestName}">Quoc Nam Le</th>
                                     <td th:text="${room.capacity}">System Architect</td>
                                     <td th:text="${room.roomType}">Edinburgh</td>
                                     <td th:text="${room.price}">61</td>

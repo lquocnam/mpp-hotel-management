@@ -6,6 +6,7 @@ import edu.miu.cs401.mpp.hotelmanagement.entity.BookingType;
 import edu.miu.cs401.mpp.hotelmanagement.entity.Room;
 import edu.miu.cs401.mpp.hotelmanagement.entity.RoomType;
 import edu.miu.cs401.mpp.hotelmanagement.repository.RoomRepository;
+import edu.miu.cs401.mpp.hotelmanagement.service.BookingDetailService;
 import edu.miu.cs401.mpp.hotelmanagement.service.RoomService;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,12 @@ import java.util.stream.Collectors;
 
 @Service
 public class RoomServiceImpl extends BaseService<Room, RoomDto, Long> implements RoomService {
+
+    private final BookingDetailService bookingDetailService;
+
+    public RoomServiceImpl(BookingDetailService bookingDetailService) {
+        this.bookingDetailService = bookingDetailService;
+    }
 
     @Override
     public List<RoomType> getRoomTypes() {
@@ -29,10 +36,10 @@ public class RoomServiceImpl extends BaseService<Room, RoomDto, Long> implements
 
     @Override
     public List<RoomDto> getAll() {
-        List<RoomDto> rooms = super.getAll();
         Set<RoomDto> availableRooms = getAvailableRooms();
         Set<RoomDto> occupiedRooms = getOccupiedRooms();
-        for (RoomDto room : rooms) {
+        List<RoomDto> rooms = super.getAll();
+        rooms.forEach(room -> {
             if (availableRooms.contains(room)) {
                 room.setStatus(RoomStatus.Available);
             } else if (occupiedRooms.contains(room)) {
@@ -40,7 +47,7 @@ public class RoomServiceImpl extends BaseService<Room, RoomDto, Long> implements
             } else {
                 room.setStatus(RoomStatus.Reserved);
             }
-        }
+        });
         return rooms;
     }
 
@@ -51,6 +58,8 @@ public class RoomServiceImpl extends BaseService<Room, RoomDto, Long> implements
 
     @Override
     public Set<RoomDto> getOccupiedRooms() {
-        return ((RoomRepository) repository).findOccupiedRooms().stream().map(converter::toDto).collect(Collectors.toSet());
+        Set<RoomDto> occupiedRooms = ((RoomRepository) repository).findOccupiedRooms().stream().map(converter::toDto).collect(Collectors.toSet());
+        occupiedRooms.forEach(r -> r.setGuestName(bookingDetailService.getByRoom(r)));
+        return occupiedRooms;
     }
 }

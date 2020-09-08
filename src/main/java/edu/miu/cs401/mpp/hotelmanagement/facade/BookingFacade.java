@@ -5,7 +5,11 @@ import edu.miu.cs401.mpp.hotelmanagement.dto.BookingDto;
 
 public interface BookingFacade {
 
-    BookingDto createNew(BookingDto dto);
+    BookingDto createOrUpdate(BookingDto booking);
 
-    BookingDetailDto createOrUpdate(BookingDetailDto dto);
+    BookingDetailDto createOrUpdate(BookingDetailDto detail);
+
+    void updateBookingAmount(BookingDto booking);
+
+    void checkout(BookingDto dto);
 }

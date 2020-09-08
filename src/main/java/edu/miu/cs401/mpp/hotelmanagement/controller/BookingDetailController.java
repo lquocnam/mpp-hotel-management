@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Optional;
 import java.util.Set;
 
 @Controller
@@ -37,16 +36,6 @@ public class BookingDetailController {
         this.bookingDetailService = bookingDetailService;
     }
 
-//    @GetMapping(value = "")
-//    public String bookingInfo(Model model, @RequestParam(name = "guestId") Long guestId) {
-//        guestService.getById(guestId).ifPresent(g -> {
-//            model.addAttribute("guest", g);
-//            model.addAttribute("bookings", bookingService.getOpenBookingsByGuest(g));
-//            model.addAttribute("availableRooms", roomService.getAvailableRooms());
-//        });
-//        return "booking/info";
-//    }
-
     @RequestMapping("/create")
     public String create(Model model, @RequestParam(name = "bookingId") Long bookingId) {
         bookingService.getById(bookingId).ifPresent(b -> {
@@ -58,32 +47,18 @@ public class BookingDetailController {
         return "booking/detail/create";
     }
 
-//    @RequestMapping("/reserve")
-//    public String reserve(Model model) {
-//        model.addAttribute("details", bookingDetailService.getReservation());
-//        return "booking/reserve";
-//    }
-//
-//    @RequestMapping("/checkin")
-//    public String checkin(Model model) {
-//        model.addAttribute("details", bookingDetailService.getCheckin());
-//        return "booking/checkin";
-//    }
-//
-//    @RequestMapping("/checkout")
-//    public String checkout(Model model) {
-//        model.addAttribute("details", bookingDetailService.getCheckout());
-//        return "booking/checkout";
-//    }
-
     @RequestMapping("/edit/{id}")
     public String edit(@PathVariable Long id, Model model) {
-        bookingDetailService.getById(id).ifPresent(dto -> {
-            LOG.info("Edit new booking detail {}", id);
-            model.addAttribute("types", roomService.getBookingTypes());
-            Set<RoomDto> availableRooms = roomService.getAvailableRooms();
-            availableRooms.add(dto.getRoom());
-            model.addAttribute("availableRooms", availableRooms);
+        bookingDetailService.getById(id).ifPresent(detail -> {
+            bookingService.getById(detail.getBooking().getId()).ifPresent(b -> {
+                LOG.info("Edit new booking detail {}", id);
+                model.addAttribute("booking", b);
+                model.addAttribute("detail", detail);
+                model.addAttribute("types", roomService.getBookingTypes());
+                Set<RoomDto> availableRooms = roomService.getAvailableRooms();
+                availableRooms.add(detail.getRoom());
+                model.addAttribute("availableRooms", availableRooms);
+            });
         });
         return "booking/detail/edit";
     }
@@ -91,18 +66,14 @@ public class BookingDetailController {
     @RequestMapping(value = "", method = RequestMethod.POST)
     public String save(BookingDetailDto bookingDetail) {
         BookingDetailDto updatedDetail = bookingFacade.createOrUpdate(bookingDetail);
-        return "redirect:/bookings/edit/" + updatedDetail.getBooking().getId();
+        return "redirect:/bookings/view/" + updatedDetail.getBooking().getId();
     }
 
     @RequestMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
-        Optional<BookingDetailDto> opDetail = bookingDetailService.getById(id);
-        if (opDetail.isPresent()) {
-            BookingDetailDto detail = opDetail.get();
-            bookingService.delete(detail.getId());
-            return "redirect:/bookings/edit/" + detail.getBooking().getId();
-        } else {
-            return "redirect:/bookings";
-        }
+        return bookingDetailService.getById(id).map(detail -> {
+            bookingDetailService.delete(detail.getId());
+            return "redirect:/bookings/view/" + detail.getBooking().getId();
+        }).orElse("redirect:/bookings");
     }
 }

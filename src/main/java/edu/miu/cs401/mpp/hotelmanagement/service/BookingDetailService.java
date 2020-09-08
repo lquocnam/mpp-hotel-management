@@ -2,6 +2,7 @@ package edu.miu.cs401.mpp.hotelmanagement.service;
 
 import edu.miu.cs401.mpp.hotelmanagement.dto.BookingDetailDto;
 import edu.miu.cs401.mpp.hotelmanagement.dto.BookingDto;
+import edu.miu.cs401.mpp.hotelmanagement.dto.RoomDto;
 
 import java.util.List;
 
@@ -13,4 +14,7 @@ public interface BookingDetailService extends Service<BookingDetailDto, Long> {
     List<BookingDetailDto> getCheckin();
 
     List<BookingDetailDto> getCheckout();
+
+    String getByRoom(RoomDto room);
+
 }

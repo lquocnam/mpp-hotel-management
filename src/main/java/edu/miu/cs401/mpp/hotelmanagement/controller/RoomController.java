@@ -43,6 +43,7 @@ public class RoomController {
         Set<RoomDto> occupiedRooms = roomService.getOccupiedRooms();
         System.out.println(occupiedRooms);
         model.addAttribute("rooms", occupiedRooms);
+        model.addAttribute("showGuestName", true);
         return "room/list";
     }
 

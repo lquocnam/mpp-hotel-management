@@ -15,7 +15,11 @@ public class RoomDto {
 
     private RoomType roomType;
 
+    /**
+     * Additional fields
+     */
     private RoomStatus status;
+    private String guestName;
 
     public Long getId() {
         return id;
@@ -68,6 +72,15 @@ public class RoomDto {
 
     public RoomDto setStatus(RoomStatus status) {
         this.status = status;
+        return this;
+    }
+
+    public String getGuestName() {
+        return guestName;
+    }
+
+    public RoomDto setGuestName(String guestName) {
+        this.guestName = guestName;
         return this;
     }
 
