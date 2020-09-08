@@ -1,0 +1,32 @@
+<form method="post"
+      th:action="@{/rooms}" th:fragment="form(room)" xmlns:th="http://www.thymeleaf.org">
+    <div class="modal-header">
+        <h4 class="modal-title">Add Room</h4>
+    </div>
+    <div class="modal-body">
+        <input name="id" th:if="${room != null}" type="hidden">
+        <div class="form-group">
+            <label>Room No.</label>
+            <input class="form-control" name="roomNo" type="text">
+        </div>
+        <div class="form-group">
+            <label>Type</label>
+            <select class="form-control" id="roomType" name="roomType">
+                <option th:each="roomType : ${room.roomTypes}"
+                        th:text="${roomType}" th:value="${roomType}">
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Capacity</label>
+            <input class="form-control" name="capacity" type="text">
+        </div>
+        <div class="form-group">
+            <label>Price</label>
+            <input class="form-control" name="price" type="text">
+        </div>
+    </div>
+    <div class="modal-footer">
+        <input class="btn btn-success" type="submit" value="Save">
+    </div>
+</form>

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 
@@ -23,8 +24,8 @@ public class BaseService<E, D, ID> implements Service<D, ID> {
     }
 
     @Override
-    public D getById(ID id) {
-        return repository.findById(id).map(e -> converter.toDto(e)).orElse(null);
+    public Optional<D> getById(ID id) {
+        return repository.findById(id).map(e -> converter.toDto(e));
     }
 
     @Override

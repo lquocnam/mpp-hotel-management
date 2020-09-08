@@ -14,10 +14,6 @@ public class Guest extends BaseEntity {
     private String lastName;
     private String phoneNumber;
     private Date dob;
-//    private String street;
-//    private String city;
-//    private String state;
-//    private String zip;
 
     @Embedded
     private Address address;

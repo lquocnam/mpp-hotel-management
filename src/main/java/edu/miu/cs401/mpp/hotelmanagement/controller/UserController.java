@@ -1,7 +1,8 @@
 package edu.miu.cs401.mpp.hotelmanagement.controller;
 
-import edu.miu.cs401.mpp.hotelmanagement.dto.RoomDto;
-import edu.miu.cs401.mpp.hotelmanagement.service.RoomService;
+import edu.miu.cs401.mpp.hotelmanagement.dto.UserDto;
+import edu.miu.cs401.mpp.hotelmanagement.service.UserService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,50 +15,44 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
 
-    private final RoomService roomService;
+    private final UserService userService;
 
-    public UserController(RoomService roomService) {
-        this.roomService = roomService;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-//    @PreAuthorize("hasRole('SUPER')")
+    @PreAuthorize("hasRole('ADMIN')")
     public String list(Model model) {
-        List<RoomDto> all = roomService.getAll();
+        List<UserDto> all = userService.getAll();
         System.out.println(all);
         model.addAttribute("users", all);
         return "user/list";
     }
 
-//    @RequestMapping("/{id}")
-//    public String detail(@PathVariable Long id, Model model) {
-//        model.addAttribute("room", roomService.getById(id));
-//        return "room/detail";
-//    }
-
     @RequestMapping("/create")
     public String create(Model model) {
-        model.addAttribute("roomTypes", roomService.getRoomTypes());
-        return "room/create";
+//        model.addAttribute("roomTypes", userService.getRoomTypes());
+        return "user/create";
     }
 
-    @RequestMapping("/edit/{id}")
-    public String edit(@PathVariable Long id, Model model) {
-        RoomDto room = roomService.getById(id);
-        model.addAttribute("roomTypes", roomService.getRoomTypes());
-        model.addAttribute("room", room);
-        return "room/edit";
+    @RequestMapping("/edit/{username}")
+    public String edit(@PathVariable String username, Model model) {
+        userService.getById(username).ifPresent(u -> model.addAttribute("user", u));
+//        model.addAttribute("roomTypes", userService.getRoomTypes());
+        ;
+        return "user/edit";
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public String save(RoomDto room) {
-        roomService.update(room);
-        return "redirect:/rooms";
+    public String save(UserDto user) {
+        userService.update(user);
+        return "redirect:/users";
     }
 
     @RequestMapping("/delete/{id}")
-    public String delete(@PathVariable Long id) {
-        roomService.delete(id);
+    public String delete(@PathVariable String username) {
+        userService.delete(username);
         return "redirect:/users";
     }
 }

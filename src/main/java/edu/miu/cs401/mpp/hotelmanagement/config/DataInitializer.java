@@ -9,12 +9,11 @@ import edu.miu.cs401.mpp.hotelmanagement.repository.RoomRepository;
 import edu.miu.cs401.mpp.hotelmanagement.service.UserService;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 import java.util.HashSet;
 
-@Component
+//@Component
 public class DataInitializer implements ApplicationListener<ContextRefreshedEvent> {
 
     private final UserService userService;

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:insert="fragments/head_crud"></th:block>
+<body class="sb-nav-fixed">
+<th:block th:insert="fragments/navbar :: navbar"></th:block>
+<div id="layoutSidenav">
+    <th:block th:insert="fragments/sidenav :: sidenav"></th:block>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <h1 class="mt-4"></h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a th:href="${'/'}">Home</a></li>
+                    <li class="breadcrumb-item"><a th:href="${'/bookings'}">Bookings</a></li>
+                    <li class="breadcrumb-item active">Checkouts</li>
+                </ol>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="table-responsive">
+
+                            <table cellspacing="0" class="table table-bordered" id="dataTable"
+                                   th:if="${not #lists.isEmpty(details)}" width="100%">
+                                <thead>
+                                <tr>
+                                    <th>Room No.</th>
+                                    <th>Type</th>
+                                    <th>Status</th>
+                                    <th>Checkout Date</th>
+                                    <th>Amount</th>
+                                    <th>Notes</th>
+                                    <!--                                    <th>Actions</th>-->
+                                </tr>
+                                </thead>
+                                <tfoot>
+                                <tr>
+                                    <th>Room No.</th>
+                                    <th>Type</th>
+                                    <th>Status</th>
+                                    <th>Checkout Date</th>
+                                    <th>Amount</th>
+                                    <th>Notes</th>
+                                    <!--                                    <th>Actions</th>-->
+                                </tr>
+                                </tfoot>
+                                <tbody>
+                                <tr th:each="detail : ${details}">
+                                    <td th:text="${detail.room.roomNo}">Tiger Nixon</td>
+                                    <td th:text="${detail.type}">System Architect</td>
+                                    <td th:text="${detail.status}">System Architect</td>
+                                    <td th:text="${detail.checkoutDate}">61</td>
+                                    <td th:text="${detail.amount}">61</td>
+                                    <td th:text="${detail.description}">61</td>
+                                    <!--                                    <td>-->
+                                    <!--                                        <a class="edit" th:href="@{/bookings/checkin?guestId={id}(id=${guest.id})}">-->
+                                    <!--                                            <i class="material-icons" data-toggle="tooltip"-->
+                                    <!--                                               title="Edit">&#xE254;</i></a>-->
+                                    <!--                                        <a class="edit" th:href="@{/bookings/edit/{id}?guestId={guestId}(id=${booking.id}, guestId=${guest.id})}">-->
+                                    <!--                                            <i class="material-icons" data-toggle="tooltip"-->
+                                    <!--                                               title="Edit">&#xE254;</i></a>-->
+                                    <!--                                        <a class="delete" th:href="@{/bookings/delete/{id}?guestId={guestId}(id=${booking.id}, guestId=${guest.id})}">-->
+                                    <!--                                            <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>-->
+                                    <!--                                    </td>-->
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <th:block th:insert="fragments/footer :: footer"></th:block>
+    </div>
+</div>
+<th:block th:insert="fragments/scripts"></th:block>
+</body>
+</html>
