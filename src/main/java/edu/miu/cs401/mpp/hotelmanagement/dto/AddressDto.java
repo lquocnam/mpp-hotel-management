@@ -45,4 +45,14 @@ public class AddressDto {
         this.zip = zip;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "AddressDto{" +
+                "street='" + street + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", zip='" + zip + '\'' +
+                '}';
+    }
 }

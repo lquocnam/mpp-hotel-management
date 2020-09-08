@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/rooms")
@@ -22,18 +23,28 @@ public class RoomController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
 //    @PreAuthorize("hasRole('SUPER')")
-    public String list(Model model) {
+    public String allRooms(Model model) {
         List<RoomDto> all = roomService.getAll();
         System.out.println(all);
         model.addAttribute("rooms", all);
         return "room/list";
     }
 
-//    @RequestMapping("/{id}")
-//    public String detail(@PathVariable Long id, Model model) {
-//        model.addAttribute("room", roomService.getById(id));
-//        return "room/detail";
-//    }
+    @RequestMapping(value = "/available", method = RequestMethod.GET)
+    public String availableRooms(Model model) {
+        Set<RoomDto> availableRooms = roomService.getAvailableRooms();
+        System.out.println(availableRooms);
+        model.addAttribute("rooms", availableRooms);
+        return "room/list";
+    }
+
+    @RequestMapping(value = "/occupied", method = RequestMethod.GET)
+    public String occupiedRooms(Model model) {
+        Set<RoomDto> occupiedRooms = roomService.getOccupiedRooms();
+        System.out.println(occupiedRooms);
+        model.addAttribute("rooms", occupiedRooms);
+        return "room/list";
+    }
 
     @RequestMapping("/create")
     public String create(Model model) {
@@ -43,9 +54,8 @@ public class RoomController {
 
     @RequestMapping("/edit/{id}")
     public String edit(@PathVariable Long id, Model model) {
-        RoomDto room = roomService.getById(id);
+        roomService.getById(id).ifPresent(r -> model.addAttribute("room", r));
         model.addAttribute("roomTypes", roomService.getRoomTypes());
-        model.addAttribute("room", room);
         return "room/edit";
     }
 

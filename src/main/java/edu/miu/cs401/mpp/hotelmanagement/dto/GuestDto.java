@@ -82,39 +82,16 @@ public class GuestDto {
         return this;
     }
 
-    //    public String getStreet() {
-//        return street;
-//    }
-//
-//    public GuestDto setStreet(String street) {
-//        this.street = street;
-//        return this;
-//    }
-//
-//    public String getCity() {
-//        return city;
-//    }
-//
-//    public GuestDto setCity(String city) {
-//        this.city = city;
-//        return this;
-//    }
-//
-//    public String getState() {
-//        return state;
-//    }
-//
-//    public GuestDto setState(String state) {
-//        this.state = state;
-//        return this;
-//    }
-//
-//    public String getZip() {
-//        return zip;
-//    }
-//
-//    public GuestDto setZip(String zip) {
-//        this.zip = zip;
-//        return this;
-//    }
+    @Override
+    public String toString() {
+        return "GuestDto{" +
+                "id=" + id +
+                ", gender=" + gender +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", dob=" + dob +
+                ", address=" + address +
+                '}';
+    }
 }

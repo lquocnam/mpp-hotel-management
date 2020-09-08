@@ -45,9 +45,8 @@ public class GuestController {
 
     @RequestMapping("/edit/{id}")
     public String edit(@PathVariable Long id, Model model) {
-        GuestDto guest = guestService.getById(id);
+        guestService.getById(id).ifPresent(g -> model.addAttribute("guest", g));
         model.addAttribute("genders", guestService.getGenders());
-        model.addAttribute("guest", guest);
         return "guest/edit";
     }
 

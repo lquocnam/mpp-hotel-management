@@ -8,47 +8,48 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid">
-                <h1 class="mt-4">Rooms</h1>
+                <h1 class="mt-4"></h1>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item"><a th:href="${'/'}">Home</a></li>
-                    <li class="breadcrumb-item"><a th:href="${'/rooms'}">Rooms</a></li>
-                    <li class="breadcrumb-item active">Add</li>
+                    <li class="breadcrumb-item"><a th:href="${'/bookings'}">Bookings</a></li>
+                    <li class="breadcrumb-item active">Add Detail</li>
                 </ol>
-                <form method="post" th:action="@{/rooms}">
+                <form method="post" th:action="@{/bookings}">
                     <div class="modal-header">
-                        <h4 class="modal-title">Add Room</h4>
+                        <h4 class="modal-title">Create Booking Detail</h4>
                     </div>
                     <div class="modal-body">
-                        <input name="id" type="hidden">
+                        <input name="booking.id" th:value="${booking.id}" type="hidden">
                         <div class="form-group">
-                            <label>Room No.</label>
-                            <input class="form-control" name="roomNo" type="text">
+                            <label>Booking No.</label>
+                            <input class="form-control" disabled name="bookingNo" type="text">
                         </div>
                         <div class="form-group">
-                            <label>Type</label>
-                            <select class="form-control" id="roomType" name="roomType">
-                                <option th:each="roomType : ${roomTypes}"
-                                        th:text="${roomType}" th:value="${roomType}">
+                            <label>Choose Type</label>
+                            <select class="form-control" id="type" name="type">
+                                <option th:each="type : ${types}"
+                                        th:text="${type}" th:value="${type}">
                                 </option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Capacity</label>
-                            <input class="form-control" name="capacity" type="text">
+                            <label>Choose Room</label>
+                            <select class="form-control" id="roomId" name="roomId">
+                                <option th:each="room : ${availableRooms}"
+                                        th:text="${room.roomNo}" th:value="${room.id}">
+                                </option>
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label>Price</label>
-                            <div class="input-group">
-                                <input class="form-control" name="price" placeholder="Price" type="text">
-                                <div class="input-group-addon">.00</div>
-                            </div>
+                            <label>Notes</label>
+                            <textarea class="form-control" name="notes"></textarea>
                         </div>
+
                     </div>
                     <div class="modal-footer">
                         <input class="btn btn-success" type="submit" value="Save">
                     </div>
                 </form>
-
             </div>
         </main>
         <th:block th:insert="fragments/footer :: footer"></th:block>

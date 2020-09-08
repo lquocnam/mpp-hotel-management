@@ -2,6 +2,8 @@ package edu.miu.cs401.mpp.hotelmanagement.dto;
 
 import edu.miu.cs401.mpp.hotelmanagement.entity.RoomType;
 
+import java.util.Objects;
+
 public class RoomDto {
     private Long id;
 
@@ -12,6 +14,8 @@ public class RoomDto {
     private Double price;
 
     private RoomType roomType;
+
+    private RoomStatus status;
 
     public Long getId() {
         return id;
@@ -56,6 +60,32 @@ public class RoomDto {
     public RoomDto setRoomType(RoomType roomType) {
         this.roomType = roomType;
         return this;
+    }
+
+    public RoomStatus getStatus() {
+        return status;
+    }
+
+    public RoomDto setStatus(RoomStatus status) {
+        this.status = status;
+        return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RoomDto roomDto = (RoomDto) o;
+        return Objects.equals(id, roomDto.id) &&
+                Objects.equals(roomNo, roomDto.roomNo) &&
+                Objects.equals(capacity, roomDto.capacity) &&
+                Objects.equals(price, roomDto.price) &&
+                roomType == roomDto.roomType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, roomNo, capacity, price, roomType);
     }
 
     @Override
