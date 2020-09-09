@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
 <th:block th:insert="fragments/head_crud"></th:block>
 <body class="sb-nav-fixed">
 <th:block th:insert="fragments/navbar :: navbar"></th:block>
@@ -8,12 +8,12 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid">
-                <h1 class="mt-4"></h1>
+                <h1 class="mt-4">Guest</h1>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item"><a th:href="${'/'}">Home</a></li>
                     <li class="breadcrumb-item active">Bookings</li>
                 </ol>
-                <div class="table-title">
+                <div class="table-title" sec:authorize="hasAuthority('STAFF')">
                     <div class="row">
                         <div class="col-sm-9">
                             <h2></h2>
@@ -24,6 +24,9 @@
                                 <span>New Booking</span></a>
                         </div>
                     </div>
+                </div>
+                <div class="modal-header">
+                    <h4 class="modal-title">Guest Information</h4>
                 </div>
                 <div class="modal-body">
                     <input name="id" th:value="${guest.id}" type="hidden">
@@ -89,11 +92,11 @@
                                            th:href="@{/bookings/view/{id}?guestId={guestId}(id=${booking.id}, guestId=${guest.id})}">
                                             <i class="material-icons" data-toggle="tooltip"
                                                title="View Booking Details">visibility</i></a>
-                                        <a class="edit"
+                                        <a class="edit" sec:authorize="hasAuthority('STAFF')"
                                            th:href="@{/bookings/edit/{id}?guestId={guestId}(id=${booking.id}, guestId=${guest.id})}">
                                             <i class="material-icons" data-toggle="tooltip"
                                                title="Edit">&#xE254;</i></a>
-                                        <a class="delete"
+                                        <a class="delete" sec:authorize="hasAuthority('STAFF')"
                                            th:href="@{/bookings/delete/{id}?guestId={guestId}(id=${booking.id}, guestId=${guest.id})}">
                                             <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                                     </td>

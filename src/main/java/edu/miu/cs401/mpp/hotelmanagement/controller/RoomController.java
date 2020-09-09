@@ -27,6 +27,8 @@ public class RoomController {
         List<RoomDto> all = roomService.getAll();
         System.out.println(all);
         model.addAttribute("rooms", all);
+        model.addAttribute("title", "All Rooms");
+        model.addAttribute("showAll", true);
         return "room/list";
     }
 
@@ -35,6 +37,8 @@ public class RoomController {
         Set<RoomDto> availableRooms = roomService.getAvailableRooms();
         System.out.println(availableRooms);
         model.addAttribute("rooms", availableRooms);
+        model.addAttribute("title", "Available Rooms");
+        model.addAttribute("showAll", false);
         return "room/list";
     }
 
@@ -44,7 +48,16 @@ public class RoomController {
         System.out.println(occupiedRooms);
         model.addAttribute("rooms", occupiedRooms);
         model.addAttribute("showGuestName", true);
+        model.addAttribute("title", "Occupied Rooms");
+        model.addAttribute("showAll", false);
         return "room/list";
+    }
+
+    @RequestMapping("/view/{id}")
+    public String view(@PathVariable Long id, Model model) {
+        roomService.getById(id).ifPresent(r -> model.addAttribute("room", r));
+        model.addAttribute("roomTypes", roomService.getRoomTypes());
+        return "room/view";
     }
 
     @RequestMapping("/create")

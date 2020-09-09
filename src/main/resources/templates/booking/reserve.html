@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
 <th:block th:insert="fragments/head_crud"></th:block>
 <body class="sb-nav-fixed">
 <th:block th:insert="fragments/navbar :: navbar"></th:block>
@@ -8,7 +8,7 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid">
-                <h1 class="mt-4"></h1>
+                <h1 class="mt-4">Reservation</h1>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item"><a th:href="${'/'}">Home</a></li>
                     <li class="breadcrumb-item"><a th:href="${'/bookings'}">Bookings</a></li>
@@ -28,7 +28,7 @@
                                     <th>Reservation Date</th>
                                     <th>Amount</th>
                                     <th>Notes</th>
-                                    <!--                                    <th>Actions</th>-->
+                                    <th>Actions</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
@@ -39,7 +39,7 @@
                                     <th>Reservation Date</th>
                                     <th>Amount</th>
                                     <th>Notes</th>
-                                    <!--                                    <th>Actions</th>-->
+                                    <th>Actions</th>
                                 </tr>
                                 </tfoot>
                                 <tbody>
@@ -50,16 +50,18 @@
                                     <td th:text="${detail.reservedDate}">Edinburgh</td>
                                     <td th:text="${detail.amount}">61</td>
                                     <td th:text="${detail.description}">61</td>
-                                    <!--                                    <td>-->
-                                    <!--                                        <a class="edit" th:href="@{/bookings/checkin?guestId={id}(id=${guest.id})}">-->
-                                    <!--                                            <i class="material-icons" data-toggle="tooltip"-->
-                                    <!--                                               title="Edit">&#xE254;</i></a>-->
-                                    <!--                                        <a class="edit" th:href="@{/bookings/edit/{id}?guestId={guestId}(id=${booking.id}, guestId=${guest.id})}">-->
-                                    <!--                                            <i class="material-icons" data-toggle="tooltip"-->
-                                    <!--                                               title="Edit">&#xE254;</i></a>-->
-                                    <!--                                        <a class="delete" th:href="@{/bookings/delete/{id}?guestId={guestId}(id=${booking.id}, guestId=${guest.id})}">-->
-                                    <!--                                            <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>-->
-                                    <!--                                    </td>-->
+                                    <td>
+                                        <a class="edit" th:href="@{/bookings/detail/view/{id}(id=${detail.id})}">
+                                            <i class="material-icons" data-toggle="tooltip"
+                                               title="View">visibility</i></a>
+                                        <a class="edit" sec:authorize="hasAuthority('STAFF')"
+                                           th:href="@{/bookings/detail/edit/{id}(id=${detail.id})}">
+                                            <i class="material-icons" data-toggle="tooltip"
+                                               title="Edit">&#xE254;</i></a>
+                                        <a class="delete" sec:authorize="hasAuthority('STAFF')"
+                                           th:href="@{/bookings/detail/delete/{id}(id=${detail.id})}">
+                                            <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>

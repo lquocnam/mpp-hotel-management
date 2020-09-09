@@ -1,24 +1,23 @@
 package edu.miu.cs401.mpp.hotelmanagement.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 public class Role {
     @Id
-    private String code;
+    @Enumerated(EnumType.STRING)
+    private RoleCode code;
     private String name;
 
     @ManyToMany(mappedBy = "roles")
     private Set<User> users;
 
-    public String getCode() {
+    public RoleCode getCode() {
         return code;
     }
 
-    public Role setCode(String code) {
+    public Role setCode(RoleCode code) {
         this.code = code;
         return this;
     }

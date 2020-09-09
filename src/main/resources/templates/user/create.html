@@ -8,25 +8,28 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid">
-                <h1 class="mt-4"></h1>
+                <h1 class="mt-4">Users</h1>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item"><a th:href="${'/'}">Home</a></li>
-                    <li class="breadcrumb-item"><a th:href="${'/guests'}">Guests</a></li>
+                    <li class="breadcrumb-item"><a th:href="${'/users'}">Users</a></li>
                     <li class="breadcrumb-item active">Add</li>
                 </ol>
-                <form method="post" th:action="@{/guests}">
+                <form method="post" th:action="@{/users}">
                     <div class="modal-header">
-                        <h4 class="modal-title">Add Guest</h4>
+                        <h4 class="modal-title">Add User</h4>
                     </div>
                     <div class="modal-body">
-                        <input name="id" type="hidden">
                         <div class="form-group">
-                            <label>First Name</label>
-                            <input class="form-control" name="firstName" type="text">
+                            <label>Full Name</label>
+                            <input class="form-control" name="name" type="text">
                         </div>
                         <div class="form-group">
-                            <label>Last Name</label>
-                            <input class="form-control" name="lastName" type="text">
+                            <label>Username</label>
+                            <input class="form-control" name="username" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input class="form-control" name="password" type="password">
                         </div>
                         <div class="form-group">
                             <label>Gender</label>
@@ -59,6 +62,28 @@
                         <div class="form-group">
                             <label>Zip Code</label>
                             <input class="form-control" name="address.zip" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label>Roles</label>
+                            <ul>
+                                <li th:each="role : ${availableRoles}">
+                                    <input name="roles" th:value="${role.code}" type="checkbox"/>
+                                    <label th:text="${role.name}"></label>
+                                </li>
+                            </ul>
+
+                            <!--                            <input th:each="role : ${availableRoles}" type="checkbox" name="roles" th:value="${role.code}" th:text="${role.name}">-->
+                            <!--                            <ul>-->
+                            <!--                                <li>-->
+                            <!--                                    <input id="features1" name="roles1" type="checkbox" value="ADMIN" />-->
+                            <!--                                    <label for="features1">Admin</label>-->
+                            <!--                                </li>-->
+                            <!--                                <li>-->
+                            <!--                                    <input id="features2" name="roles1" type="checkbox" value="STAFF" />-->
+                            <!--                                    <label for="features2">Staff</label>-->
+                            <!--                                </li>-->
+                            <!--                            </ul>-->
+
                         </div>
                     </div>
                     <div class="modal-footer">

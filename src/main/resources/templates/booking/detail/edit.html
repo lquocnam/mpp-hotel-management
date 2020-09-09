@@ -12,11 +12,11 @@
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item"><a th:href="${'/'}">Home</a></li>
                     <li class="breadcrumb-item"><a th:href="${'/bookings'}">Bookings</a></li>
-                    <li class="breadcrumb-item active">Add Detail</li>
+                    <li class="breadcrumb-item active">Edit Detail</li>
                 </ol>
                 <form method="post" th:action="@{/bookings/detail}">
                     <div class="modal-header">
-                        <h4 class="modal-title">Create Booking Detail</h4>
+                        <h4 class="modal-title">Edit Booking Detail</h4>
                     </div>
                     <div class="modal-body">
                         <input name="id" th:value="${detail.id}" type="hidden">
@@ -30,7 +30,7 @@
                             <label>Choose Type</label>
                             <select class="form-control" id="type" name="type">
                                 <option th:each="type : ${types}"
-                                        th:text="${type}" th:value="${type}">
+                                        th:selected="${type.equals(detail.type)}" th:text="${type}" th:value="${type}">
                                 </option>
                             </select>
                         </div>
@@ -38,7 +38,8 @@
                             <label>Choose Room</label>
                             <select class="form-control" id="room.id" name="room.id">
                                 <option th:each="room : ${availableRooms}"
-                                        th:text="${room.roomNo}" th:value="${room.id}">
+                                        th:selected="${room.id == detail.room.id}" th:text="${room.toString()}"
+                                        th:value="${room.id}">
                                 </option>
                             </select>
                         </div>

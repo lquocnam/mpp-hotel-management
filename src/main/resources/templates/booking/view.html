@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
 <th:block th:insert="fragments/head_crud"></th:block>
 <body class="sb-nav-fixed">
 <th:block th:insert="fragments/navbar :: navbar"></th:block>
@@ -14,7 +14,7 @@
                     <li class="breadcrumb-item"><a th:href="${'/bookings'}">Bookings</a></li>
                     <li class="breadcrumb-item active">View</li>
                 </ol>
-                <div class="table-title">
+                <div class="table-title" sec:authorize="hasAuthority('STAFF')">
                     <div class="row">
                         <div class="col-sm-6">
                             <h2></h2>
@@ -34,7 +34,7 @@
                 </div>
                 <form method="post" th:action="@{/bookings}">
                     <div class="modal-header">
-                        <h4 class="modal-title">Booking Information</h4>
+                        <h4 class="modal-title">View Booking</h4>
                     </div>
                     <div class="modal-body">
                         <!--                        <input name="guest.id" th:value="${guest.id}" type="hidden">-->
@@ -106,14 +106,14 @@
                                     <td th:text="${detail.amount}">61</td>
                                     <td th:text="${detail.description}">61</td>
                                     <td>
-                                        <!--                                        <a class="edit" th:href="@{/bookings/checkin?guestId={id}(id=${guest.id})}">-->
-                                        <!--                                            <i class="material-icons" data-toggle="tooltip"-->
-                                        <!--                                               title="Edit">&#xE254;</i></a>-->
-                                        <a class="edit"
+                                        <a class="edit" th:href="@{/bookings/detail/view/{id}(id=${detail.id})}">
+                                            <i class="material-icons" data-toggle="tooltip"
+                                               title="View">visibility</i></a>
+                                        <a class="edit" sec:authorize="hasAuthority('STAFF')"
                                            th:href="@{/bookings/detail/edit/{id}(id=${detail.id})}">
                                             <i class="material-icons" data-toggle="tooltip"
                                                title="Edit">&#xE254;</i></a>
-                                        <a class="delete"
+                                        <a class="delete" sec:authorize="hasAuthority('STAFF')"
                                            th:href="@{/bookings/detail/delete/{id}(id=${detail.id})}">
                                             <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                                     </td>

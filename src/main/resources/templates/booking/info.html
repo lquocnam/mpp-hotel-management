@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
 <th:block th:insert="fragments/head_crud"></th:block>
 <body class="sb-nav-fixed">
 <th:block th:insert="fragments/navbar :: navbar"></th:block>
@@ -13,7 +13,7 @@
                     <li class="breadcrumb-item"><a th:href="${'/'}">Home</a></li>
                     <li class="breadcrumb-item active">Bookings</li>
                 </ol>
-                <div class="table-title" th:if="${guest != null}">
+                <div class="table-title" sec:authorize="hasAuthority('STAFF')" th:if="${guest != null}">
                     <div class="row">
                         <div class="col-sm-9">
                             <h2></h2>
@@ -64,11 +64,11 @@
                                            th:href="@{/bookings/view/{id}(id=${booking.id})}">
                                             <i class="material-icons" data-toggle="tooltip"
                                                title="View">visibility</i></a>
-                                        <a class="edit"
+                                        <a class="edit" sec:authorize="hasAuthority('STAFF')"
                                            th:href="@{/bookings/edit/{id}(id=${booking.id})}">
                                             <i class="material-icons" data-toggle="tooltip"
                                                title="Edit">&#xE254;</i></a>
-                                        <a class="delete"
+                                        <a class="delete" sec:authorize="hasAuthority('STAFF')"
                                            th:href="@{/bookings/delete/{id}(id=${booking.id})}">
                                             <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                                     </td>

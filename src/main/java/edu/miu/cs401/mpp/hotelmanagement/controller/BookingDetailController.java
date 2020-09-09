@@ -36,6 +36,21 @@ public class BookingDetailController {
         this.bookingDetailService = bookingDetailService;
     }
 
+    @RequestMapping("/view/{id}")
+    public String view(@PathVariable Long id, Model model) {
+        bookingDetailService.getById(id).ifPresent(detail -> {
+            bookingService.getById(detail.getBooking().getId()).ifPresent(b -> {
+                model.addAttribute("booking", b);
+                model.addAttribute("detail", detail);
+                model.addAttribute("types", roomService.getBookingTypes());
+                Set<RoomDto> availableRooms = roomService.getAvailableRooms();
+                availableRooms.add(detail.getRoom());
+                model.addAttribute("availableRooms", availableRooms);
+            });
+        });
+        return "booking/detail/view";
+    }
+
     @RequestMapping("/create")
     public String create(Model model, @RequestParam(name = "bookingId") Long bookingId) {
         bookingService.getById(bookingId).ifPresent(b -> {

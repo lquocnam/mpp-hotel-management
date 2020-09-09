@@ -103,12 +103,6 @@ public class RoomDto {
 
     @Override
     public String toString() {
-        return "RoomDto{" +
-                "id=" + id +
-                ", roomNo='" + roomNo + '\'' +
-                ", capacity=" + capacity +
-                ", price=" + price +
-                ", roomType=" + roomType +
-                '}';
+        return String.format("Room No. %s - %s Room", roomNo, roomType);
     }
 }
