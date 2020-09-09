@@ -2,6 +2,7 @@ package edu.miu.cs401.mpp.hotelmanagement.service.impl;
 
 import edu.miu.cs401.mpp.hotelmanagement.dto.BookingDetailDto;
 import edu.miu.cs401.mpp.hotelmanagement.dto.BookingDto;
+import edu.miu.cs401.mpp.hotelmanagement.dto.RoomDto;
 import edu.miu.cs401.mpp.hotelmanagement.entity.BookingDetail;
 import edu.miu.cs401.mpp.hotelmanagement.entity.BookingStatus;
 import edu.miu.cs401.mpp.hotelmanagement.entity.BookingType;
@@ -27,6 +28,11 @@ public class BookingDetailServiceImpl extends BaseService<BookingDetail, Booking
     public List<BookingDetailDto> getByBooking(BookingDto booking) {
         return ((BookingDetailRepository) repository).findByBooking(bookingConverter.fromDto(booking))
                 .stream().map(bd -> converter.toDto(bd)).collect(Collectors.toList());
+    }
+
+    @Override
+    public String getByRoom(RoomDto room) {
+        return null;
     }
 
     @Override

@@ -8,12 +8,12 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid">
-                <h1 class="mt-4"></h1>
+                <h1 class="mt-4">Guest</h1>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item"><a th:href="${'/'}">Home</a></li>
                     <li class="breadcrumb-item active">Bookings</li>
                 </ol>
-                <div class="table-title" sec:authorize="hasAuthority('STAFF')" th:if="${guest != null}">
+                <div class="table-title" sec:authorize="hasAuthority('STAFF')">
                     <div class="row">
                         <div class="col-sm-9">
                             <h2></h2>
@@ -23,6 +23,34 @@
                                     class="material-icons">&#xE147;</i>
                                 <span>New Booking</span></a>
                         </div>
+                    </div>
+                </div>
+                <div class="modal-header">
+                    <h4 class="modal-title">Guest Information</h4>
+                </div>
+                <div class="modal-body">
+                    <input name="id" th:value="${guest.id}" type="hidden">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input class="form-control" disabled name="firstName" th:value="${guest.fullName}" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <input class="form-control" disabled name="lastName" th:value="${guest.gender}" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input class="form-control" disabled name="phoneNumber" th:value="${guest.phoneNumber}"
+                               type="text">
+                    </div>
+                    <div class="form-group">
+                        <label>DOB</label>
+                        <input class="form-control" disabled name="dob" th:value="${guest.dob}" type="date">
+                    </div>
+                    <div class="form-group">
+                        <label>Street</label>
+                        <input class="form-control" disabled name="address.address"
+                               th:value="${guest.address.address}" type="text">
                     </div>
                 </div>
 
@@ -61,15 +89,15 @@
                                     <td th:text="${booking.amount}">61</td>
                                     <td>
                                         <a class="edit"
-                                           th:href="@{/bookings/view/{id}(id=${booking.id})}">
+                                           th:href="@{/bookings/view/{id}?guestId={guestId}(id=${booking.id}, guestId=${guest.id})}">
                                             <i class="material-icons" data-toggle="tooltip"
-                                               title="View">visibility</i></a>
+                                               title="View Booking Details">visibility</i></a>
                                         <a class="edit" sec:authorize="hasAuthority('STAFF')"
-                                           th:href="@{/bookings/edit/{id}(id=${booking.id})}">
+                                           th:href="@{/bookings/edit/{id}?guestId={guestId}(id=${booking.id}, guestId=${guest.id})}">
                                             <i class="material-icons" data-toggle="tooltip"
                                                title="Edit">&#xE254;</i></a>
                                         <a class="delete" sec:authorize="hasAuthority('STAFF')"
-                                           th:href="@{/bookings/delete/{id}(id=${booking.id})}">
+                                           th:href="@{/bookings/delete/{id}?guestId={guestId}(id=${booking.id}, guestId=${guest.id})}">
                                             <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                                     </td>
                                 </tr>

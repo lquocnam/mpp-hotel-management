@@ -1,9 +1,6 @@
 package edu.miu.cs401.mpp.hotelmanagement.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
 
 @Entity
 public class Room extends BaseEntity {
@@ -18,6 +15,9 @@ public class Room extends BaseEntity {
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
     private RoomType roomType;
+
+    @Transient
+    private String guestName;
 
     public String getRoomNo() {
         return roomNo;
@@ -52,6 +52,15 @@ public class Room extends BaseEntity {
 
     public Room setRoomType(RoomType roomType) {
         this.roomType = roomType;
+        return this;
+    }
+
+    public String getGuestName() {
+        return guestName;
+    }
+
+    public Room setGuestName(String guestName) {
+        this.guestName = guestName;
         return this;
     }
 }

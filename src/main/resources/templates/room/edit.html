@@ -28,7 +28,8 @@
                             <label>Type</label>
                             <select class="form-control" id="roomType" name="roomType">
                                 <option th:each="roomType : ${roomTypes}"
-                                        th:text="${roomType}" th:value="${roomType}">
+                                        th:selected="${roomType.equals(room.roomType)}" th:text="${roomType}"
+                                        th:value="${roomType}">
                                 </option>
                             </select>
                         </div>
@@ -41,7 +42,6 @@
                             <div class="input-group">
                                 <input class="form-control" name="price" placeholder="Price" th:value="${room.price}"
                                        type="text">
-                                <div class="input-group-addon">.00</div>
                             </div>
                         </div>
                     </div>

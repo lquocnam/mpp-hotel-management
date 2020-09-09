@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
 <th:block th:insert="fragments/head_crud"></th:block>
 <body class="sb-nav-fixed">
 <th:block th:insert="fragments/navbar :: navbar"></th:block>
@@ -8,12 +8,12 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid">
-                <h1 class="mt-4">Guest</h1>
+                <h1 class="mt-4">Guests</h1>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item"><a th:href="${'/'}">Home</a></li>
                     <li class="breadcrumb-item active">Guests</li>
                 </ol>
-                <div class="table-title">
+                <div class="table-title" sec:authorize="hasAuthority('STAFF')">
                     <div class="row">
                         <div class="col-sm-9">
                             <h2></h2>
@@ -61,11 +61,13 @@
                                     <td>
                                         <a class="edit" th:href="@{/bookings?guestId={id}(id=${guest.id})}">
                                             <i class="material-icons" data-toggle="tooltip"
-                                               title="Edit">&#xE254;</i></a>
-                                        <a class="edit" th:href="@{/guests/edit/{id}(id=${guest.id})}">
+                                               title="View Bookings">visibility</i></a>
+                                        <a class="edit" sec:authorize="hasAuthority('STAFF')"
+                                           th:href="@{/guests/edit/{id}(id=${guest.id})}">
                                             <i class="material-icons" data-toggle="tooltip"
                                                title="Edit">&#xE254;</i></a>
-                                        <a class="delete" th:href="@{/guests/delete/{id}(id=${guest.id})}">
+                                        <a class="delete" sec:authorize="hasAuthority('STAFF')"
+                                           th:href="@{/guests/delete/{id}(id=${guest.id})}">
                                             <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                                     </td>
                                 </tr>

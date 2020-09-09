@@ -15,7 +15,11 @@ public class RoomDto {
 
     private RoomType roomType;
 
+    /**
+     * Additional fields
+     */
     private RoomStatus status;
+    private String guestName;
 
     public Long getId() {
         return id;
@@ -71,6 +75,15 @@ public class RoomDto {
         return this;
     }
 
+    public String getGuestName() {
+        return guestName;
+    }
+
+    public RoomDto setGuestName(String guestName) {
+        this.guestName = guestName;
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -90,12 +103,6 @@ public class RoomDto {
 
     @Override
     public String toString() {
-        return "RoomDto{" +
-                "id=" + id +
-                ", roomNo='" + roomNo + '\'' +
-                ", capacity=" + capacity +
-                ", price=" + price +
-                ", roomType=" + roomType +
-                '}';
+        return String.format("Room No. %s - %s Room", roomNo, roomType);
     }
 }
