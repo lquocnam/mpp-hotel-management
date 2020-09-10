@@ -1,5 +1,5 @@
 spring:
-  jpa.hibernate.ddl-auto: update
+  jpa.hibernate.ddl-auto: create
   datasource:
     url: jdbc:mysql://localhost:3306/hotel_management
     username: root
@@ -20,3 +20,8 @@ spring:
   resources:
     static-locations: file:src/main/resources/static/
 #    cache-period: 0
+
+server:
+  error:
+    whitelabel:
+      enabled: false
