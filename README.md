@@ -25,7 +25,7 @@ Super Admin:
 ```
 	git clone https://github.com/lquocnam/mpp-hotel-management.git
 	cd mpp-hotel-management
-	./mvnw spring-boot:run
+	mvn spring-boot:run
 ```
 Credentials to access the system are the same as on Heroku. 
 
