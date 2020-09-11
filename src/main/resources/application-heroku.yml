@@ -1,0 +1,8 @@
+spring:
+  jpa.hibernate.ddl-auto: create
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${DATABASE_URL}
+    #      : jdbc:postgres://oqhkbccvoxtrxl:5bf8f03f6221de5abd3306ec7ed0f77407ab425d1fa4bb11a4c6f7505818d9a3@ec2-52-23-86-208.compute-1.amazonaws.com:5432/d4h8gp86jev09m
+
+
