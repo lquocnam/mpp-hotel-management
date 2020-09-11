@@ -4,12 +4,6 @@ spring:
     url: jdbc:mysql://localhost:3306/hotel_management
     username: root
     password: quocnamle
-  jpa:
-    generate-ddl: true
-    show-sql: true
-  #    properties:
-  #      hibernate:
-  #        format-sql: true
 
   # Templates reloading during development
   thymeleaf:
@@ -20,8 +14,3 @@ spring:
   resources:
     static-locations: file:src/main/resources/static/
 #    cache-period: 0
-
-server:
-  error:
-    whitelabel:
-      enabled: false
