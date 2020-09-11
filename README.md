@@ -8,7 +8,7 @@
 ## Deploy to Heroku
 Deployment to Heroku and can be accessed via <a href="https://mpp-hotel-management.herokuapp.com">here</a>
 
-###Credentials to login in Heroku:
+### Credentials to login in Heroku:
 
 ```
 Staff:
