@@ -8,16 +8,18 @@
 ## Deploy to Heroku
 Deployment to Heroku and can be accessed via <a href="https://mpp-hotel-management.herokuapp.com">here</a>
 ###Credentials to login in Heroku:
-####Staff:
+
+```
+Staff:
     Username: staff
-    Password: nimda
-####Admin:
+    Password: nimda   
+Admin:
     Username: admin
     Password: nimda
-####Super Admin:
+Super Admin:
     Username: superadmin
     Password: nimda
-
+``` 
 ## Running project locally
 ```
 	git clone https://github.com/lquocnam/mpp-hotel-management.git
