@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: hsql
+    active: heroku
   jpa:
     generate-ddl: true
     show-sql: true
